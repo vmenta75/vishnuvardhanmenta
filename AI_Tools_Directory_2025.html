@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Tools Directory 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{
+  --bg:#060d1a;--bg-elevated:#0b1428;--bg-card:#101d36;--bg-hover:#162544;
+  --fg:#e2e8f4;--fg-muted:#7a8fad;--fg-dim:#3a4e6e;
+  --accent:#3b82f6;--accent-soft:rgba(59,130,246,0.12);--accent-glow:rgba(59,130,246,0.2);
+  --accent-bright:#60a5fa;--accent-deep:#2563eb;
+  --green:#22c55e;--green-soft:rgba(34,197,94,0.12);
+  --red:#ef4444;--red-soft:rgba(239,68,68,0.1);
+  --border:#162038;--border-light:#1e3050;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;overflow-x:hidden}
+
+/* Atmospheric background */
+body::before{content:'';position:fixed;top:-40%;left:-20%;width:80vw;height:80vw;background:radial-gradient(ellipse,rgba(37,99,235,0.07) 0%,rgba(15,23,42,0) 65%);pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;bottom:-30%;right:-20%;width:70vw;height:70vw;background:radial-gradient(ellipse,rgba(59,130,246,0.05) 0%,rgba(15,23,42,0) 60%);pointer-events:none;z-index:0}
+
+/* Subtle animated gradient shift */
+.bg-shift{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(800px circle at var(--mx,50%) var(--my,50%),rgba(37,99,235,0.04),transparent 50%);
+  transition:background 0.3s ease}
+
+.noise-overlay{position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+
+.app-container{position:relative;z-index:1}
+.header{border-bottom:1px solid var(--border);background:rgba(6,13,26,0.88);backdrop-filter:blur(24px);position:sticky;top:0;z-index:50}
+.cat-tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:0 4px}.cat-tabs::-webkit-scrollbar{display:none}
+.cat-tab{flex-shrink:0;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:500;color:var(--fg-muted);background:transparent;border:1px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.cat-tab:hover{color:var(--fg);background:var(--bg-hover)}
+.cat-tab.active{color:var(--accent-bright);background:var(--accent-soft);border-color:rgba(59,130,246,0.2)}
+.cat-tab .count{font-family:'JetBrains Mono',monospace;font-size:11px;padding:1px 6px;border-radius:4px;background:var(--bg-hover);color:var(--fg-dim)}
+.cat-tab.active .count{background:rgba(59,130,246,0.15);color:var(--accent-bright)}
+.search-box{position:relative}.search-box input{width:100%;padding:10px 14px 10px 38px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;color:var(--fg);font-family:inherit;font-size:14px;outline:none;transition:border-color .2s,box-shadow .2s}.search-box input::placeholder{color:var(--fg-dim)}.search-box input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}.search-box i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--fg-dim);font-size:14px}
+.tools-table{width:100%;border-collapse:separate;border-spacing:0}
+.tools-table thead th{position:sticky;top:0;padding:12px 14px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--fg-dim);background:var(--bg-elevated);border-bottom:1px solid var(--border);cursor:pointer;user-select:none;transition:color .2s;white-space:nowrap}
+.tools-table thead th:hover{color:var(--fg-muted)}.tools-table thead th.sorted{color:var(--accent-bright)}.tools-table thead th .sort-icon{margin-left:4px;font-size:10px}
+.tools-table tbody tr{transition:background .15s}.tools-table tbody tr:hover{background:var(--bg-hover)}
+.tools-table tbody td{padding:14px 14px;font-size:13.5px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+.tool-name{font-weight:600;color:var(--fg);display:flex;align-items:center;gap:8px}.tool-name .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.capability-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11.5px;margin:2px 3px 2px 0;background:var(--bg-hover);color:var(--fg-muted);border:1px solid var(--border)}
+.capability-tag.whatsapp{background:rgba(37,211,102,0.08);color:#34d399;border-color:rgba(37,211,102,0.15)}
+.capability-tag.phone{background:rgba(59,130,246,0.08);color:#60a5fa;border-color:rgba(59,130,246,0.15)}
+.capability-tag.sms{background:rgba(168,85,247,0.08);color:#c084fc;border-color:rgba(168,85,247,0.15)}
+.capability-tag.ai-tag{background:rgba(59,130,246,0.1);color:var(--accent-bright);border-color:rgba(59,130,246,0.18)}
+.cost-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:6px;font-size:12px;font-weight:500;font-family:'JetBrains Mono',monospace}
+.cost-free{background:var(--green-soft);color:var(--green)}.cost-freemium{background:var(--accent-soft);color:var(--accent-bright)}.cost-paid{background:var(--red-soft);color:var(--red)}.cost-open{background:rgba(99,102,241,0.1);color:#818cf8}
+.free-tip{font-size:12.5px;color:var(--fg-muted);line-height:1.6}.free-tip strong{color:var(--green);font-weight:500}
+.yt-link{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:7px;font-size:12px;font-weight:500;color:#ff4444;background:rgba(255,68,68,0.08);border:1px solid rgba(255,68,68,0.15);text-decoration:none;transition:all .2s;white-space:nowrap}
+.yt-link:hover{background:rgba(255,68,68,0.16);border-color:rgba(255,68,68,0.35);color:#ff6666;transform:translateY(-1px)}.yt-link i{font-size:13px}
+.yt-link-compact{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:7px;color:#ff4444;background:rgba(255,68,68,0.08);border:1px solid rgba(255,68,68,0.15);text-decoration:none;transition:all .2s}.yt-link-compact:hover{background:rgba(255,68,68,0.16);border-color:rgba(255,68,68,0.35)}.yt-link-compact i{font-size:13px}
+.download-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;border:1px solid var(--border);background:var(--bg-card);color:var(--fg);font-family:inherit}
+.download-btn:hover{background:var(--bg-hover);border-color:var(--accent);color:var(--accent-bright);transform:translateY(-1px);box-shadow:0 4px 20px rgba(59,130,246,0.1)}
+.download-btn.primary{background:var(--accent-deep);color:#fff;border-color:var(--accent-deep);box-shadow:0 2px 12px rgba(37,99,235,0.25)}
+.download-btn.primary:hover{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 4px 24px rgba(59,130,246,0.35)}
+.stat-card{padding:20px 24px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;transition:all .2s}.stat-card:hover{border-color:var(--border-light);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.2)}
+.stat-number{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:700;line-height:1}.stat-label{font-size:13px;color:var(--fg-muted);margin-top:6px}
+.table-wrap{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--bg-elevated);box-shadow:0 4px 30px rgba(0,0,0,0.15)}
+.table-scroll{max-height:65vh;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border-light) transparent}.table-scroll::-webkit-scrollbar{width:6px}.table-scroll::-webkit-scrollbar-track{background:transparent}.table-scroll::-webkit-scrollbar-thumb{background:var(--border-light);border-radius:3px}
+.no-results{text-align:center;padding:60px 20px;color:var(--fg-dim)}.no-results i{font-size:40px;margin-bottom:16px;display:block}
+.toast{position:fixed;bottom:30px;right:30px;padding:14px 22px;background:var(--bg-card);border:1px solid var(--green);border-radius:12px;color:var(--green);font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;transform:translateY(100px);opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1);z-index:100;box-shadow:0 10px 40px rgba(0,0,0,0.4);max-width:420px}
+.toast.show{transform:translateY(0);opacity:1}.toast.error{border-color:var(--red);color:var(--red)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}.fade-up{animation:fadeUp .4s ease forwards}
+.tabs-scroll{overflow-x:auto;scrollbar-width:none}.tabs-scroll::-webkit-scrollbar{display:none}
+.pricing-cell{font-size:12.5px;color:var(--fg-muted);line-height:1.6}
+.view-toggle{display:flex;gap:2px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:3px}
+.view-toggle button{padding:6px 12px;border-radius:6px;font-size:12px;font-weight:500;color:var(--fg-dim);background:transparent;border:none;cursor:pointer;transition:all .2s;font-family:inherit;display:flex;align-items:center;gap:5px}
+.view-toggle button:hover{color:var(--fg-muted)}.view-toggle button.active{background:var(--bg-hover);color:var(--fg)}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:16px}
+.tool-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:24px;transition:all .2s}.tool-card:hover{border-color:var(--border-light);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.2)}
+.tool-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.tool-card-name{font-size:17px;font-weight:700;display:flex;align-items:center;gap:8px}
+.tool-card-section{margin-bottom:12px}.tool-card-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--fg-dim);margin-bottom:6px}
+.download-overlay{position:fixed;inset:0;background:rgba(3,7,18,0.8);backdrop-filter:blur(8px);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.download-overlay.active{opacity:1;pointer-events:all}
+.download-modal{background:var(--bg-card);border:1px solid var(--border-light);border-radius:18px;padding:32px;max-width:440px;width:90%;text-align:center;transform:scale(.9);transition:transform .3s cubic-bezier(.34,1.56,.64,1);box-shadow:0 20px 60px rgba(0,0,0,0.4)}
+.download-overlay.active .download-modal{transform:scale(1)}
+.download-modal h3{font-size:18px;font-weight:700;margin-bottom:8px}.download-modal p{font-size:13px;color:var(--fg-muted);margin-bottom:24px;line-height:1.6}
+.download-modal-actions{display:flex;gap:10px;justify-content:center}.download-modal-actions .download-btn{flex:1;justify-content:center}
+select{background:var(--bg-card)!important;color:var(--fg)!important}
+select option{background:var(--bg-card);color:var(--fg)}
+@media(max-width:768px){.tools-table thead th,.tools-table tbody td{padding:10px 8px;font-size:12px}.stat-number{font-size:24px}.hide-mobile{display:none}.card-grid{grid-template-columns:1fr}}
+@media print{.header{position:relative}.no-print{display:none!important}.table-scroll{max-height:none;overflow:visible}body{background:#fff;color:#111}.tool-card{border:1px solid #ddd;break-inside:avoid}}
+
+/* ============================================================
+   COMMON SITE NAV — identical block lives on every page.
+   See the HTML comment near <body> for instructions on adding
+   a new page later.
+   ============================================================ */
+.site-nav{position:sticky;top:0;z-index:100;background:rgba(5,11,24,0.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(140,170,255,0.14);font-family:'Space Grotesk',sans-serif}
+.site-nav-inner{max-width:1600px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.site-nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#e2e8f4;font-weight:700;font-size:13px;letter-spacing:.04em}
+.site-nav-brand img{width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid rgba(140,170,255,0.3)}
+.site-nav-links{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.site-nav-link{font-size:13px;font-weight:500;color:#7a8fad;text-decoration:none;padding:7px 14px;border-radius:8px;border:1px solid transparent;transition:.15s;white-space:nowrap}
+.site-nav-link:hover{color:#e2e8f4;background:rgba(255,255,255,0.05)}
+.site-nav-link.is-current{color:#60a5fa;background:rgba(59,130,246,0.12);border-color:rgba(59,130,246,0.25)}
+.header{top:52px}
+</style>
+</head>
+<body data-site-page="ai-tools">
+<!-- ============================================================
+     COMMON SITE NAVIGATION — paste this exact block (unchanged)
+     at the top of <body> on every new page you create.
+
+     TO ADD A NEW PAGE LATER:
+       1. Build your new file, e.g. "my-new-page.html"
+       2. Copy ONE link line below (the <a class="site-nav-link">...)
+          and paste it just above "<!-- add new pages here 
+       3. Set href="my-new-page.html", set the visible text, and set
+          data-page="my-new-page" (any short unique id)
+       4. On the new page's <body> tag, add: data-site-page="my-new-page"
+          That's what makes the link highlight as the active page.
+       5. Paste this whole .site-nav block + the tiny script at the
+          bottom unchanged into the new page too.
+     ============================================================ -->
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a href="vishnu-portfolio.html" class="site-nav-brand">
+      <img src="profile.png" alt="Vishnu Vardhan Menta">
+      VISHNU VARDHAN MENTA
+    </a>
+    <div class="site-nav-links">
+      <a href="vishnu-portfolio.html" class="site-nav-link" data-page="portfolio">Portfolio</a>
+      <a href="AI_Tools_Directory_2025.html" class="site-nav-link" data-page="ai-tools">AI Tools Directory</a>
+      <!-- add new pages here -->
+    </div>
+  </div>
+</nav>
+<script>
+(function(){
+  var current = document.body.getAttribute('data-site-page');
+  var links = document.querySelectorAll('.site-nav-link');
+  for (var i=0;i<links.length;i++){
+    if (links[i].getAttribute('data-page') === current) links[i].classList.add('is-current');
+  }
+})();
+</script>
+<!-- ============================================================
+     END COMMON SITE NAVIGATION
+     ============================================================ -->
+<div class="bg-shift" id="bgShift"></div>
+<div class="noise-overlay"></div>
+<div class="app-container">
+<header class="header">
+  <div class="max-w-[1600px] mx-auto px-6 py-4">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-3">
+      <div class="flex items-center gap-3">
+        <div style="width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--accent-deep),var(--accent));display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(37,99,235,0.3)"><i class="fas fa-layer-group" style="color:#fff;font-size:16px"></i></div>
+        <div>
+          <h1 style="font-size:18px;font-weight:700;letter-spacing:-0.02em">AI Tools Directory 2025</h1>
+          <p style="font-size:11px;color:var(--fg-dim);margin-top:1px">60+ tools across 13 categories with tutorials & free-tier strategies</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 no-print flex-wrap">
+        <button class="download-btn" id="btnDownloadCurrent"><i class="fas fa-download"></i><span class="hide-mobile">Current Sheet</span></button>
+        <button class="download-btn primary" id="btnDownloadAll"><i class="fas fa-file-csv"></i><span class="hide-mobile">Download All CSV</span></button>
+      </div>
+    </div>
+    <div class="tabs-scroll"><div class="cat-tabs" id="catTabs"></div></div>
+  </div>
+</header>
+<main class="max-w-[1600px] mx-auto px-6 py-8">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 fade-up" id="statsRow"></div>
+  <div class="flex flex-col sm:flex-row gap-4 mb-6 no-print fade-up" style="animation-delay:.1s">
+    <div class="search-box flex-1"><i class="fas fa-search"></i><input type="text" id="searchInput" placeholder="Search tools, capabilities, tips, YouTube..."></div>
+    <div class="flex gap-2 items-center flex-wrap">
+      <select id="costFilter" style="padding:10px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;color:var(--fg);font-family:inherit;font-size:13px;outline:none;cursor:pointer">
+        <option value="all">All Pricing</option><option value="Free">Free</option><option value="Freemium">Freemium</option><option value="Paid">Paid</option><option value="Open Source">Open Source</option>
+      </select>
+      <div class="view-toggle no-print">
+        <button class="active" id="btnTableView"><i class="fas fa-table-list"></i> Table</button>
+        <button id="btnCardView"><i class="fas fa-grip"></i> Cards</button>
+      </div>
+    </div>
+  </div>
+  <div id="tableView" class="table-wrap fade-up" style="animation-delay:.2s">
+    <div class="table-scroll"><table class="tools-table"><thead>
+      <tr>
+        <th data-col="0" style="min-width:170px">Tool Name <span class="sort-icon"></span></th>
+        <th data-col="1" style="min-width:280px" class="hide-mobile">Capabilities <span class="sort-icon"></span></th>
+        <th data-col="2" style="min-width:110px">Cost <span class="sort-icon"></span></th>
+        <th data-col="3" style="min-width:150px" class="hide-mobile">Pricing Details <span class="sort-icon"></span></th>
+        <th style="min-width:300px">How to Maximize Free Usage</th>
+        <th style="min-width:100px;text-align:center">YouTube</th>
+      </tr>
+    </thead><tbody id="tableBody"></tbody></table></div>
+  </div>
+  <div id="cardView" class="card-grid fade-up" style="display:none;animation-delay:.2s"></div>
+  <div class="flex flex-col sm:flex-row items-center justify-between mt-6 gap-4 no-print fade-up" style="animation-delay:.3s">
+    <p style="font-size:12px;color:var(--fg-dim)" id="resultCount"></p>
+    <div class="flex gap-3">
+      <button class="download-btn" id="btnPrint"><i class="fas fa-print"></i> Print / PDF</button>
+      <button class="download-btn" id="btnCopy"><i class="fas fa-copy"></i> Copy</button>
+    </div>
+  </div>
+</main>
+</div>
+<div class="download-overlay" id="downloadOverlay">
+  <div class="download-modal">
+    <div id="modalIcon" style="font-size:40px;margin-bottom:16px;color:var(--accent-bright)"><i class="fas fa-file-csv"></i></div>
+    <h3 id="modalTitle">Download CSV</h3>
+    <p id="modalDesc">Preparing your file...</p>
+    <div class="download-modal-actions">
+      <button class="download-btn" id="modalCancel"><i class="fas fa-times"></i> Cancel</button>
+      <button class="download-btn primary" id="modalConfirm"><i class="fas fa-download"></i> Download Now</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
+
+<script>
+// Mouse-following background glow
+document.addEventListener('mousemove',function(e){
+  var s=document.getElementById('bgShift');
+  if(s){s.style.setProperty('--mx',e.clientX+'px');s.style.setProperty('--my',e.clientY+'px');}
+});
+
+var categoryColors={'Research':'#3b82f6','Workflows':'#06b6d4','Voice Creations':'#ec4899','Video Creations':'#8b5cf6','MCP Configuration':'#ef4444','Image Generation':'#22c55e','Agent Creations':'#f97316','Text & Writing':'#14b8a6','Code & Development':'#6366f1','Music & Audio':'#e879f9','Data Analysis':'#0ea5e9','Presentations':'#facc15','Phone & WhatsApp Config':'#25d366'};
+var categoryIcons={'Research':'fa-microscope','Workflows':'fa-diagram-project','Voice Creations':'fa-microphone-lines','Video Creations':'fa-film','MCP Configuration':'fa-plug','Image Generation':'fa-image','Agent Creations':'fa-robot','Text & Writing':'fa-pen-fancy','Code & Development':'fa-code','Music & Audio':'fa-music','Data Analysis':'fa-chart-line','Presentations':'fa-display','Phone & WhatsApp Config':'fa-phone-volume'};
+
+var allTools=[
+{name:'Perplexity AI',category:'Research',capabilities:['AI-powered search','Citation tracking','Real-time web access','Academic mode','Follow-up questions','File analysis'],cost:'Freemium',pricing:'Free: 5 Pro searches/day. Pro: $20/mo (unlimited Pro, 300+ AI models)',freeTip:'Use <strong>standard search mode</strong> for unlimited basic queries. Reserve 5 Pro searches for complex multi-source research.',youtube:'https://www.youtube.com/results?search_query=Perplexity+AI+full+tutorial+2025'},
+{name:'Consensus',category:'Research',capabilities:['Research paper search','Evidence-based answers','Consensus meter','Study analysis','Citation export','PDF chat'],cost:'Freemium',pricing:'Free: Limited searches. Premium: $9.99/mo',freeTip:'Use <strong>precise boolean queries</strong> to get better results per search credit. Export DOIs to Sci-Hub for free full-text.',youtube:'https://www.youtube.com/results?search_query=Consensus+AI+research+tool+tutorial'},
+{name:'Elicit',category:'Research',capabilities:['Literature review','Paper extraction','Concept mapping','Research matrix','Citation network','PDF upload'],cost:'Freemium',pricing:'Free: 500 credits/mo. Plus: $10/mo',freeTip:'Upload papers as PDFs instead of searching to save credits. Use <strong>Research Assistant flow</strong> to batch-extract data.',youtube:'https://www.youtube.com/results?search_query=Elicit+AI+literature+review+tutorial'},
+{name:'Semantic Scholar',category:'Research',capabilities:['Academic search engine','Citation graph','TLDR summaries','Research feeds','Semantic matching','API access'],cost:'Free',pricing:'Completely free, backed by Allen Institute for AI',freeTip:'Create a <strong>research library</strong> and set up email alerts. Use the API for bulk metadata extraction.',youtube:'https://www.youtube.com/results?search_query=Semantic+Scholar+tutorial+how+to+use'},
+{name:'SciSpace',category:'Research',capabilities:['Literature review','Copilot reading','Formula explanation','Table extraction','Reference analysis','Chat with papers'],cost:'Freemium',pricing:'Free: 5 chats/paper, 6 uploads/day. Premium: $20/mo',freeTip:'Use <strong>Chrome extension</strong> to chat with any open-access paper for free. Focus 5 chats on hardest sections.',youtube:'https://www.youtube.com/results?search_query=SciSpace+Copilot+tutorial'},
+{name:'Google Gemini',category:'Research',capabilities:['Web search integration','Deep Research mode','Multi-modal analysis','Long context (1M tokens)','Google Docs integration','Source linking'],cost:'Freemium',pricing:'Free: Gemini 2.0 Flash. Advanced: $20/mo',freeTip:'Use <strong>Gemini 2.0 Flash</strong> which is free and excellent for research. Upload multiple PDFs for cross-referencing.',youtube:'https://www.youtube.com/results?search_query=Google+Gemini+research+tutorial+2025'},
+
+{name:'n8n',category:'Workflows',capabilities:['Visual workflow builder','400+ integrations','AI agent nodes','Self-hosted option','Code nodes','Webhook triggers','Batch processing'],cost:'Open Source',pricing:'Self-hosted: Free. Cloud: Free (100 executions/mo). Starter: $24/mo',freeTip:'<strong>Self-host with Docker</strong> for completely free unlimited usage. All 400+ integrations work in self-hosted mode.',youtube:'https://www.youtube.com/results?search_query=n8n+tutorial+beginners+full+course+2025'},
+{name:'Zapier AI',category:'Workflows',capabilities:['7,000+ app integrations','AI-powered automation','Natural language prompts','Multi-step Zaps','Conditional logic','Scheduling'],cost:'Freemium',pricing:'Free: 100 tasks/mo, single-step. Starter: $19.99/mo',freeTip:'Use <strong>single-step Zaps</strong> efficiently. Use Filter by Zapier to avoid wasting tasks on non-qualifying data.',youtube:'https://www.youtube.com/results?search_query=Zapier+AI+automation+tutorial+2025'},
+{name:'Make (Integromat)',category:'Workflows',capabilities:['Visual scenario builder','1,800+ apps','AI modules','Data transformation','Router/Iterator','Error handling','Webhooks'],cost:'Freemium',pricing:'Free: 1,000 ops/mo. Core: $10.59/mo',freeTip:'Optimize scenarios to <strong>minimize operations</strong>. Use bulk operations instead of loops. Use filters early.',youtube:'https://www.youtube.com/results?search_query=Make+Integromat+full+tutorial+beginners'},
+{name:'Bardeen',category:'Workflows',capabilities:['Browser-based automation','AI scraping','No-code builder','Google Sheets integration','Email automation','One-click playbooks'],cost:'Freemium',pricing:'Free: Unlimited non-AI automations. Pro: $12/mo',freeTip:'Use <strong>non-AI automations</strong> which are unlimited in free tier. Build scrapers with CSS selectors instead of AI.',youtube:'https://www.youtube.com/results?search_query=Bardeen+AI+automation+tutorial'},
+{name:'Activepieces',category:'Workflows',capabilities:['Open-source alternative','Flow builder','AI piece','150+ integrations','Self-hosted','Embeddable'],cost:'Open Source',pricing:'Self-hosted: Free. Cloud: Free (500 runs/mo)',freeTip:'<strong>Self-host for free</strong> unlimited usage. Supports AI pieces in open-source version. Easy Docker deployment.',youtube:'https://www.youtube.com/results?search_query=Activepieces+tutorial+open+source+automation'},
+
+{name:'ElevenLabs',category:'Voice Creations',capabilities:['Text-to-speech','Voice cloning','29+ languages','Emotion control','Voice library','API access','Dubbing','Sound effects'],cost:'Freemium',pricing:'Free: 10k chars/mo. Starter: $5/mo. Pro: $22/mo',freeTip:'Use <strong>character-efficient scripts</strong>. Create voice clones during free trial. Combine with Edge TTS for bulk work.',youtube:'https://www.youtube.com/results?search_query=ElevenLabs+tutorial+voice+cloning+2025'},
+{name:'Edge TTS (Microsoft)',category:'Voice Creations',capabilities:['Free TTS API','400+ voices','50+ languages','SSML support','High quality','Fast generation','Python library'],cost:'Free',pricing:'Completely free via edge-tts Python package',freeTip:'Install <strong>edge-tts Python package</strong> for unlimited free generation. 400+ voices. Quality rivals paid services.',youtube:'https://www.youtube.com/results?search_query=Edge+TTS+Python+tutorial+free+text+to+speech'},
+{name:'Coqui TTS',category:'Voice Creations',capabilities:['Open-source TTS','XTTS v2 model','Voice cloning','Multi-language','Emotional speech','Local execution'],cost:'Open Source',pricing:'Completely free, runs locally',freeTip:'Use <strong>Hugging Face Spaces</strong> to run without local GPU. XTTS v2 clones voice from 3-second sample.',youtube:'https://www.youtube.com/results?search_query=Coqui+XTTS+tutorial+voice+cloning+local'},
+{name:'PlayHT',category:'Voice Creations',capabilities:['Ultra-realistic TTS','Voice cloning','50+ languages','SSML support','API','Podcast generation','Streaming'],cost:'Freemium',pricing:'Free: 12.5k chars/mo. Creator: $31/mo',freeTip:'Use <strong>SSML tags</strong> to pack more expression into fewer characters. Create clones during free trial.',youtube:'https://www.youtube.com/results?search_query=PlayHT+tutorial+voice+cloning+how+to+use'},
+{name:'Murf AI',category:'Voice Creations',capabilities:['Studio-quality TTS','120+ voices','Pitch/speed control','Video sync','Background music','Collaboration'],cost:'Freemium',pricing:'Free: 10 min gen, no download. Basic: $26/mo',freeTip:'Use free tier to <strong>preview and iterate</strong> on scripts. Plan all timing in free mode, then use single paid month to export.',youtube:'https://www.youtube.com/results?search_query=Murf+AI+voiceover+tutorial+beginners'},
+{name:'Bark',category:'Voice Creations',capabilities:['Open-source TTS','Nonverbal sounds','Music generation','Multiple languages','Emotion in voice','Local execution'],cost:'Open Source',pricing:'Completely free, runs locally',freeTip:'Run via <strong>Google Colab</strong> for free GPU access. Use Hugging Face Spaces for quick demos.',youtube:'https://www.youtube.com/results?search_query=Bark+TTS+tutorial+how+to+use+local'},
+
+{name:'Runway ML',category:'Video Creations',capabilities:['Gen-3 Alpha video gen','Image-to-video','Motion brush','Inpainting','Green screen removal','Frame interpolation'],cost:'Freemium',pricing:'Free: 125 credits. Standard: $15/mo',freeTip:'Use <strong>image-to-video</strong> instead of text-to-video for better results per credit. Keep generations at 5 seconds.',youtube:'https://www.youtube.com/results?search_query=Runway+ML+Gen+3+tutorial+2025'},
+{name:'Pika Labs',category:'Video Creations',capabilities:['Text-to-video','Image-to-video','Video-to-video','Lip sync','Sound effects','Scene modification','Extend'],cost:'Freemium',pricing:'Free: 30 credits/day. Standard: $10/mo',freeTip:'Login daily to <strong>accumulate free credits</strong> (30/day = 900/month). Use "Modify Region" to fix parts.',youtube:'https://www.youtube.com/results?search_query=Pika+Labs+tutorial+video+generation+2025'},
+{name:'Kling AI',category:'Video Creations',capabilities:['Text-to-video','Image-to-video','Lip sync','Motion brush','5-10s generations','High quality'],cost:'Freemium',pricing:'Free: 66 credits/day. Standard: $8/mo',freeTip:'<strong>66 credits/day = ~6 clips daily.</strong> Use image-to-video for best quality. Most generous free tier.',youtube:'https://www.youtube.com/results?search_query=Kling+AI+video+generation+tutorial+2025'},
+{name:'Luma Dream Machine',category:'Video Creations',capabilities:['Text-to-video','Image-to-video','Camera controls','Keyframes','Extend','Ray2 model'],cost:'Freemium',pricing:'Free: 30 generations/mo. Standard: $24/mo',freeTip:'Use <strong>image-to-video with camera controls</strong> for professional results. Storyboard first to plan 30 generations.',youtube:'https://www.youtube.com/results?search_query=Luma+Dream+Machine+tutorial+2025'},
+{name:'HeyGen',category:'Video Creations',capabilities:['AI avatar videos','Lip sync','Voice cloning','Template library','Multi-language','Streaming avatar'],cost:'Freemium',pricing:'Free: 1 credit (1 min). Creator: $29/mo',freeTip:'Use the <strong>free credit for your most important video</strong>. Use SadTalker for free basic talking head videos.',youtube:'https://www.youtube.com/results?search_query=HeyGen+tutorial+AI+avatar+video+2025'},
+{name:'CapCut (AI features)',category:'Video Creations',capabilities:['Auto-captions','AI background removal','Templates','Text-to-video','Auto-reframe','Color correction'],cost:'Free',pricing:'Completely free',freeTip:'<strong>Best free video editing suite with AI.</strong> Combine with Pika/Kling for generation, then edit in CapCut.',youtube:'https://www.youtube.com/results?search_query=CapCut+AI+features+tutorial'},
+{name:'PixVerse',category:'Video Creations',capabilities:['Text-to-video','Image-to-video','Character consistency','Multiple styles','4K export','Morphing'],cost:'Freemium',pricing:'Free: Daily credits. Subscribe: $10/mo',freeTip:'Use <strong>Discord bot</strong> for free daily generations. Focus on character consistency feature.',youtube:'https://www.youtube.com/results?search_query=PixVerse+AI+video+tutorial'},
+
+{name:'Claude Desktop (Native MCP)',category:'MCP Configuration',capabilities:['Native MCP client','File system server','GitHub integration','Memory server','Web search','Database connections'],cost:'Free',pricing:'Free to use Claude Desktop with MCP servers',freeTip:'Edit <strong>claude_desktop_config.json</strong> to add MCP servers. Use built-in filesystem MCP for local operations.',youtube:'https://www.youtube.com/results?search_query=Claude+Desktop+MCP+configuration+tutorial+2025'},
+{name:'Smithery',category:'MCP Configuration',capabilities:['MCP server registry','One-click install','Server discovery','Configuration management','Testing tools'],cost:'Free',pricing:'Free platform for discovering MCP servers',freeTip:'Use <strong>npx @smithery/cli init</strong> to quickly set up MCP in Claude Desktop. Browse registry for pre-built servers.',youtube:'https://www.youtube.com/results?search_query=Smithery+MCP+server+tutorial'},
+{name:'FastMCP',category:'MCP Configuration',capabilities:['Rapid MCP server creation','Python decorators','Auto-documentation','CLI generation','Streaming support'],cost:'Open Source',pricing:'Free open-source library',freeTip:'Use <strong>@mcp.tool() decorators</strong> to turn any Python function into an MCP tool in seconds.',youtube:'https://www.youtube.com/results?search_query=FastMCP+Python+tutorial+build+MCP+server'},
+{name:'MCP SDK (Anthropic)',category:'MCP Configuration',capabilities:['Build custom MCP servers','TypeScript/Python SDKs','Transport layer','Tool definitions','Resource handling'],cost:'Open Source',pricing:'Free open-source SDK by Anthropic',freeTip:'Use <strong>Python SDK</strong> (pip install mcp) to build custom servers. Start with stdio transport for local tools.',youtube:'https://www.youtube.com/results?search_query=MCP+SDK+tutorial+build+custom+server+2025'},
+{name:'Composio',category:'MCP Configuration',capabilities:['MCP tool integration','150+ tool connectors','Auth management','Pre-built actions','GitHub/Gmail/Slack'],cost:'Freemium',pricing:'Free tier available. Pro: $20/mo',freeTip:'Use <strong>free tier to connect 150+ tools</strong> as MCP servers without building from scratch.',youtube:'https://www.youtube.com/results?search_query=Composio+MCP+tutorial+tool+integration'},
+{name:'Cursor (MCP Support)',category:'MCP Configuration',capabilities:['MCP client in IDE','Code-aware context','File editing via MCP','Terminal access','Multi-server support'],cost:'Freemium',pricing:'Free: 2000 completions/mo. Pro: $20/mo',freeTip:'Use <strong>free tier MCP connections</strong> for enhanced coding. Add filesystem and web search MCP servers.',youtube:'https://www.youtube.com/results?search_query=Cursor+IDE+MCP+setup+tutorial+2025'},
+
+{name:'Flux (Black Forest Labs)',category:'Image Generation',capabilities:['Text-to-image','FLUX.1 Schnell','FLUX.1 Dev','High resolution','Text rendering','Open weights'],cost:'Freemium',pricing:'Schnell: Free via Hugging Face/Pollinations. Dev: Open weights',freeTip:'Use <strong>FLUX.1 Schnell for free</strong> via Hugging Face Spaces or Pollinations.ai. Run Dev locally with ComfyUI.',youtube:'https://www.youtube.com/results?search_query=Flux+AI+image+generation+tutorial+2025'},
+{name:'Stable Diffusion (Local)',category:'Image Generation',capabilities:['Text-to-image','Image-to-image','Inpainting','ControlNet','LoRA fine-tuning','ComfyUI/A1111'],cost:'Open Source',pricing:'Completely free, runs locally (8GB+ VRAM)',freeTip:'Use <strong>ComfyUI for efficient VRAM usage</strong> — works on 6GB cards. Download free models from Civitai.',youtube:'https://www.youtube.com/results?search_query=Stable+Diffusion+ComfyUI+full+tutorial+2025'},
+{name:'Leonardo AI',category:'Image Generation',capabilities:['Multiple AI models','Image generation','Real-time canvas','Motion generation','Texture generation','Training'],cost:'Freemium',pricing:'Free: 150 tokens/day. Apprentice: $12/mo',freeTip:'Login daily for <strong>150 free tokens</strong> (4,500/month). Use "Phoenix" model for best quality-per-token.',youtube:'https://www.youtube.com/results?search_query=Leonardo+AI+tutorial+beginners+2025'},
+{name:'Ideogram',category:'Image Generation',capabilities:['Text-in-image rendering','Multiple styles','Magic prompt','Remix images','Upscaling'],cost:'Freemium',pricing:'Free: 25 images/day. Basic: $8/mo',freeTip:'<strong>25 free images daily</strong> — best free option for text-in-image. Use "Magic Prompt" to enhance.',youtube:'https://www.youtube.com/results?search_query=Ideogram+AI+tutorial+text+in+image+2025'},
+{name:'Playground AI',category:'Image Generation',capabilities:['Image generation','Canvas editing','Mixed image creation','Filters','Community feed'],cost:'Freemium',pricing:'Free: 50 images/day. Pro: $15/mo',freeTip:'<strong>50 free generations per day</strong> is very generous. Use canvas to combine and edit without spending credits.',youtube:'https://www.youtube.com/results?search_query=Playground+AI+tutorial+2025'},
+{name:'Adobe Firefly',category:'Image Generation',capabilities:['Generative fill','Text effects','Generative recolor','3D-to-image','Structure reference','Commercially safe'],cost:'Freemium',pricing:'Free: 25 credits/mo. Premium: $5/mo',freeTip:'Use <strong>Generative Fill in free Adobe Express</strong> — separate from 25 credits. Commercially safe.',youtube:'https://www.youtube.com/results?search_query=Adobe+Firefly+tutorial+generative+fill+2025'},
+{name:'Pollinations.ai',category:'Image Generation',capabilities:['Free text-to-image','API access','No signup','Multiple models','Unlimited generations','Simple URL API'],cost:'Free',pricing:'Completely free, no limits, no signup',freeTip:'<strong>Truly unlimited free generation.</strong> Use URL API: image.pollinations.ai/prompt/YOUR_PROMPT',youtube:'https://www.youtube.com/results?search_query=Pollinations+AI+tutorial+free+image+generation'},
+
+{name:'CrewAI',category:'Agent Creations',capabilities:['Multi-agent orchestration','Role-based agents','Task delegation','Sequential/parallel flows','Tool integration','Memory'],cost:'Open Source',pricing:'Open source: Free. Enterprise: Custom',freeTip:'<strong>Run locally for free</strong>. Define agents with roles and goals. Use with Ollama for fully local LLM.',youtube:'https://www.youtube.com/results?search_query=CrewAI+full+tutorial+multi+agent+2025'},
+{name:'AutoGen (Microsoft)',category:'Agent Creations',capabilities:['Multi-agent conversations','Human-in-the-loop','Code execution','Tool use','Group chat patterns'],cost:'Open Source',pricing:'Completely free by Microsoft Research',freeTip:'Use with <strong>Ollama/local LLMs for zero-cost agents</strong>. Group chat manager pattern for complex tasks.',youtube:'https://www.youtube.com/results?search_query=AutoGen+Microsoft+tutorial+2025'},
+{name:'Dify',category:'Agent Creations',capabilities:['Visual agent builder','RAG pipeline','Tool integration','Workflow builder','API generation','Logging'],cost:'Open Source',pricing:'Self-hosted: Free. Cloud: Free (200 messages/mo)',freeTip:'<strong>Self-host with Docker</strong> for completely free unlimited agent building. Built-in RAG. Connect to free LLMs.',youtube:'https://www.youtube.com/results?search_query=Dify+AI+agent+builder+tutorial'},
+{name:'Flowise',category:'Agent Creations',capabilities:['Visual LangChain builder','Drag-drop agents','RAG pipelines','Tool nodes','API endpoints','Chat widgets'],cost:'Open Source',pricing:'Self-hosted: Free. Cloud: Free (limited)',freeTip:'<strong>Easiest visual LangChain builder.</strong> Self-host with npx flowise start. Connect free LLM providers.',youtube:'https://www.youtube.com/results?search_query=Flowise+tutorial+LangChain+visual+builder+2025'},
+{name:'Coze',category:'Agent Creations',capabilities:['No-code agent builder','Plugin marketplace','Knowledge base','Multi-model','Workflow builder','Publish to platforms'],cost:'Freemium',pricing:'Free: Generous tier with GPT-4o access. Pro: Custom',freeTip:'<strong>Free tier with GPT-4o access</strong>. Publish agents to Discord, Telegram, web for free.',youtube:'https://www.youtube.com/results?search_query=Coze+AI+agent+builder+tutorial+2025'},
+{name:'LangGraph',category:'Agent Creations',capabilities:['Stateful agent graphs','Cycles in agent logic','Persistence','Human-in-the-loop','Streaming','Sub-graphs'],cost:'Open Source',pricing:'Free open-source by LangChain',freeTip:'Use <strong>LangGraph Studio (free)</strong> for visual debugging. Build complex agents with cycles and conditional edges.',youtube:'https://www.youtube.com/results?search_query=LangGraph+tutorial+agent+building+2025'},
+
+{name:'Claude (Anthropic)',category:'Text & Writing',capabilities:['Long-form writing','200K context','Nuanced analysis','Code generation','Document review','Creative writing'],cost:'Freemium',pricing:'Free: Claude 3.5 Sonnet with limits. Pro: $20/mo',freeTip:'Use <strong>Projects feature in free tier</strong> to add context documents. Break long tasks into focused conversations.',youtube:'https://www.youtube.com/results?search_query=Claude+AI+writing+tutorial+2025'},
+{name:'Google Docs (AI)',category:'Text & Writing',capabilities:['AI writing assist','Grammar check','Rewrite','Summarize','Brainstorm','Tone adjustment'],cost:'Free',pricing:'Free with Google account',freeTip:'<strong>Use "Help me write" in Google Docs for free</strong> AI assistance. Works for drafts and rewrites.',youtube:'https://www.youtube.com/results?search_query=Google+Docs+AI+writing+assist+tutorial'},
+{name:'QuillBot',category:'Text & Writing',capabilities:['Paraphrasing','Grammar check','Summarizer','Citation generator','Plagiarism checker','Translator'],cost:'Freemium',pricing:'Free: Limited modes, 125 words. Premium: $9.99/mo',freeTip:'Use <strong>Synonym slider</strong> in free mode for different variations. Break text into 125-word chunks.',youtube:'https://www.youtube.com/results?search_query=QuillBot+tutorial+paraphrasing'},
+{name:'DeepL Write',category:'Text & Writing',capabilities:['AI writing improvement','Tone adjustment','Grammar correction','Rephrasing','Multi-language'],cost:'Freemium',pricing:'Free: Limited corrections. Pro: $10.49/mo',freeTip:'Free tier provides <strong>better quality rewrites than most paid tools</strong>. Exceptional for European languages.',youtube:'https://www.youtube.com/results?search_query=DeepL+Write+tutorial+2025'},
+
+{name:'Cursor',category:'Code & Development',capabilities:['AI code editor','Codebase-aware completions','Chat with code','Multi-file editing','Composer (agentic)','MCP support'],cost:'Freemium',pricing:'Free: 2000 completions/mo. Pro: $20/mo',freeTip:'Use <strong>2000 free completions strategically</strong> — use Cmd+K for specific edits, not general chat.',youtube:'https://www.youtube.com/results?search_query=Cursor+AI+editor+full+tutorial+2025'},
+{name:'Codeium',category:'Code & Development',capabilities:['AI code completions','Chat','Search','70+ languages','VS Code/JetBrains','Context awareness'],cost:'Free',pricing:'Individual: Completely free. Teams: $15/user/mo',freeTip:'<strong>Best completely free AI coding assistant.</strong> Unlimited completions for individuals.',youtube:'https://www.youtube.com/results?search_query=Codeium+tutorial+free+AI+coding'},
+{name:'GitHub Copilot',category:'Code & Development',capabilities:['AI code completions','Chat','Copilot Workspace','PR summaries','Multi-model','Agent mode'],cost:'Freemium',pricing:'Free: Students, OSS maintainers. Individual: $10/mo',freeTip:'Apply with <strong>.edu email or OSS contributions</strong> for free access. Use GitHub Student Developer Pack.',youtube:'https://www.youtube.com/results?search_query=GitHub+Copilot+tutorial+beginners+2025'},
+{name:'Supermaven',category:'Code & Development',capabilities:['Ultra-fast completions','300K context window','Inline chat','Multi-file context','Low latency'],cost:'Freemium',pricing:'Free: 1000 completions/day. Pro: $10/mo',freeTip:'<strong>1000 free completions/day = 30K/month.</strong> 300K context window understands large codebases.',youtube:'https://www.youtube.com/results?search_query=Supermaven+AI+coding+tutorial'},
+{name:'Tabnine',category:'Code & Development',capabilities:['AI completions','Private model option','On-premise deployment','Anti-bias','Multi-IDE','Security-focused'],cost:'Freemium',pricing:'Free: Basic completions. Pro: $12/mo',freeTip:'Free tier provides <strong>solid basic completions</strong> without signup. Best for privacy-conscious devs.',youtube:'https://www.youtube.com/results?search_query=Tabnine+AI+tutorial+setup'},
+
+{name:'Suno',category:'Music & Audio',capabilities:['Text-to-music','Vocal generation','Multiple genres','Song structure','Extend songs','Remix'],cost:'Freemium',pricing:'Free: 50 credits/day (10 songs). Pro: $10/mo',freeTip:'<strong>50 free credits daily = 10 songs/day = 300/month.</strong> Use "Custom Mode" for precise control.',youtube:'https://www.youtube.com/results?search_query=Suno+AI+music+generation+tutorial+2025'},
+{name:'Udio',category:'Music & Audio',capabilities:['Text-to-music','High fidelity','Genre blending','Vocal quality','Extend/refine','Instrumental mode'],cost:'Freemium',pricing:'Free: 10 credits/day (2 songs). Standard: $10/mo',freeTip:'Each prompt generates <strong>2 versions for 1 credit</strong>. Use instrumental mode for background music.',youtube:'https://www.youtube.com/results?search_query=Udio+AI+music+tutorial+2025'},
+{name:'MusicGen (Meta)',category:'Music & Audio',capabilities:['Open-source music gen','Melody conditioning','Multiple models','Local execution','No vocals option'],cost:'Open Source',pricing:'Completely free, runs locally or Hugging Face',freeTip:'Use <strong>Hugging Face Spaces for free</strong> cloud generation. MusicGen-Large produces best quality.',youtube:'https://www.youtube.com/results?search_query=MusicGen+Meta+tutorial+local'},
+{name:'BandLab',category:'Music & Audio',capabilities:['Free DAW','AI song starter','Loops/samples','Multi-track editing','Collaboration','Mastering'],cost:'Free',pricing:'Completely free music creation platform',freeTip:'<strong>Only fully free DAW with AI features.</strong> Use SongStarter AI. 1000s of free loops.',youtube:'https://www.youtube.com/results?search_query=BandLab+tutorial+beginners'},
+
+{name:'Julius AI',category:'Data Analysis',capabilities:['Chat with data','CSV/Excel analysis','Visualization generation','Statistical tests','Predictive modeling'],cost:'Freemium',pricing:'Free: 15 messages/mo. Essential: $20/mo',freeTip:'Use <strong>15 messages strategically</strong> — clean data first in Excel, then use Julius for analysis.',youtube:'https://www.youtube.com/results?search_query=Julius+AI+data+analysis+tutorial+2025'},
+{name:'Google Sheets + AI',category:'Data Analysis',capabilities:['AI formula suggestions','Explore data','Chart recommendations','Pivot tables','QUERY function','Apps Script'],cost:'Free',pricing:'Free with Google account',freeTip:'Use <strong>=QUERY() for SQL-like analysis</strong> for free. "Explore" button gives AI-powered insights.',youtube:'https://www.youtube.com/results?search_query=Google+Sheets+AI+analysis+tutorial'},
+{name:'ChatGPT Data Analysis',category:'Data Analysis',capabilities:['Python code execution','File upload analysis','Chart generation','Data cleaning','Statistical analysis'],cost:'Freemium',pricing:'Free: GPT-4o mini with data analysis. Plus: $20/mo',freeTip:'Free GPT-4o mini has <strong>full data analysis with Python execution</strong>. Excellent for datasets under 50MB.',youtube:'https://www.youtube.com/results?search_query=ChatGPT+data+analysis+Python+tutorial+2025'},
+{name:'LibreOffice Calc',category:'Data Analysis',capabilities:['Spreadsheet analysis','Pivot tables','Macros','Chart generation','CSV processing','Plugin ecosystem'],cost:'Free',pricing:'Completely free open-source',freeTip:'<strong>Full Excel alternative for free.</strong> Use for data cleaning before AI analysis.',youtube:'https://www.youtube.com/results?search_query=LibreOffice+Calc+tutorial+data+analysis'},
+
+{name:'Gamma',category:'Presentations',capabilities:['AI slide generation','Text-to-presentation','Design templates','Embedding support','Export to PPT/PDF'],cost:'Freemium',pricing:'Free: 400 AI credits (~10 presentations). Plus: $10/mo',freeTip:'Use <strong>400 credits for 10 presentations</strong>. Start from an outline. Export to PPT for free editing.',youtube:'https://www.youtube.com/results?search_query=Gamma+AI+presentation+tutorial+2025'},
+{name:'Google Slides + Gemini',category:'Presentations',capabilities:['AI slide creation','Image generation','Text help','Templates','Collaboration','Export options'],cost:'Free',pricing:'Free with Google account',freeTip:'Use <strong>"Help me create a presentation"</strong> in Google Slides for free AI-generated slides.',youtube:'https://www.youtube.com/results?search_query=Google+Slides+AI+presentation+tutorial+2025'},
+{name:'Tome',category:'Presentations',capabilities:['AI storytelling','Auto-layout','Image generation','Web embeds','Presentation mode','Share links'],cost:'Freemium',pricing:'Free: Limited AI credits. Pro: $16/mo',freeTip:'Use free credits for <strong>storytelling-style presentations</strong>. Export and refine in Google Slides.',youtube:'https://www.youtube.com/results?search_query=Tome+AI+presentation+tutorial'},
+{name:'Canva (AI features)',category:'Presentations',capabilities:['Magic Design','AI image generation','Text to presentation','Brand kit','Animation','Template library'],cost:'Freemium',pricing:'Free: Generous with AI credits. Pro: $13/mo',freeTip:'Free Canva gives <strong>access to Magic Design</strong>. Use enormous free template library.',youtube:'https://www.youtube.com/results?search_query=Canva+AI+presentation+tutorial+2025'},
+
+{name:'Twilio',category:'Phone & WhatsApp Config',capabilities:['WhatsApp Business API','SMS messaging','Voice calls','Phone number provisioning','Two-factor authentication','Conversation routing','Webhooks','Flow Builder'],cost:'Freemium',pricing:'Free trial: $15.50 credit. WhatsApp: $0.005/msg sent. Phone numbers: $1.15+/mo. SMS: $0.0079/msg',freeTip:'Use <strong>$15.50 free trial credit</strong> to build and test your full WhatsApp integration. Use Twilio\'s <strong>WhatsApp Sandbox</strong> for zero-cost testing — no Meta Business verification needed. Build your entire flow in sandbox, then switch to production.',youtube:'https://www.youtube.com/results?search_query=Twilio+WhatsApp+Business+API+tutorial+2025'},
+{name:'Vonage (Nexmo)',category:'Phone & WhatsApp Config',capabilities:['WhatsApp Business API','SMS API','Voice API','Phone numbers','Verify (2FA)','Conversation API','Video API'],cost:'Freemium',pricing:'Free: $120 credit over 120 days. WhatsApp: $0.005/msg. SMS: $0.006/msg. Numbers: $0.50+/mo',freeTip:'<strong>$120 free credit over 120 days</strong> is the most generous trial. Use WhatsApp Sandbox for free testing without Meta verification. Start with SMS (cheapest) to learn the API.',youtube:'https://www.youtube.com/results?search_query=Vonage+Nexmo+WhatsApp+API+tutorial+2025'},
+{name:'Wati',category:'Phone & WhatsApp Config',capabilities:['WhatsApp Business API','Shared team inbox','Broadcast messages','Chatbot builder','CRM integration','Template management','API access','Auto-assignments'],cost:'Freemium',pricing:'Free: 1,000 conversations/mo (limited). Starter: $49/mo (5,000 convos). Business: $99/mo',freeTip:'The <strong>free 1,000 conversations/mo</strong> is genuinely useful for small businesses. Use broadcast templates for marketing. Set up auto-replies to handle common queries without agent time.',youtube:'https://www.youtube.com/results?search_query=Wati+WhatsApp+Business+API+tutorial+2025'},
+{name:'MessageBird',category:'Phone & WhatsApp Config',capabilities:['WhatsApp Business API','SMS','Voice','Email','Instagram DM','RCS','Omnichannel inbox','Flow Builder'],cost:'Freemium',pricing:'Free: 100 test messages. WhatsApp: $0.004/msg. SMS: $0.005/msg. Numbers vary by country',freeTip:'Use <strong>100 free test messages</strong> across any channel to prototype. MessageBird Inbox is free to use — consolidate WhatsApp, Instagram, and SMS in one place.',youtube:'https://www.youtube.com/results?search_query=MessageBird+WhatsApp+API+tutorial+2025'},
+{name:'360dialog',category:'Phone & WhatsApp Config',capabilities:['WhatsApp Business Solution Provider','Direct Meta API access','No code needed','Template management','API hub','Chatbot integration','Multi-number support'],cost:'Freemium',pricing:'Free: No monthly fee, pay per conversation. WhatsApp: $0.004-0.065/conv depending on category',freeTip:'<strong>No monthly platform fee</strong> — you only pay Meta\'s per-conversation cost. Cheapest way to access WhatsApp Business API for low volume. Easy onboarding without going through Meta directly.',youtube:'https://www.youtube.com/results?search_query=360dialog+WhatsApp+Business+API+tutorial'},
+{name:'Gupshup',category:'Phone & WhatsApp Config',capabilities:['WhatsApp Business API','Conversational AI','Bot builder','NLP intents','Live agent handoff','OMNI channel','Flow builder','Analytics'],cost:'Freemium',pricing:'Free: 1,000 messages/mo trial. Pro: Pay per conversation. WhatsApp: $0.005-0.08/conv',freeTip:'Use <strong>1,000 free messages</strong> to build and test your chatbot. Their NLP intent system is powerful for free-tier bots. Build once, deploy to WhatsApp + Instagram + web.',youtube:'https://www.youtube.com/results?search_query=Gupshup+WhatsApp+chatbot+tutorial+2025'},
+{name:'Plivo',category:'Phone & WhatsApp Config',capabilities:['SMS API','Voice API','WhatsApp Business API','Phone numbers','MMS','SIP trunking','XML-based call flow','Number lookup'],cost:'Freemium',pricing:'Free trial credit on signup. SMS: $0.0038/msg. Voice: $0.0085/min. WhatsApp: $0.005/msg',freeTip:'<strong>Lowest per-message rates</strong> at $0.0038 for SMS. Use free trial to test. Plivo\'s XML-based call flows let you build IVR systems for free.',youtube:'https://www.youtube.com/results?search_query=Plivo+WhatsApp+SMS+API+tutorial+2025'},
+{name:'Vapi',category:'Phone & WhatsApp Config',capabilities:['AI phone agents','WhatsApp AI bots','Voice AI','Function calling','Transfer to human','Custom voices','Real-time transcription','Multi-model LLM'],cost:'Freemium',pricing:'Free: $5 credit. Pay-as-you-go: $0.05-0.15/min for voice. WhatsApp: per-message pricing',freeTip:'Use <strong>$5 free credit</strong> to build an AI phone agent for both calls and WhatsApp. Vapi connects to any LLM — use free Claude/GPT for the brain. Build once, deploy to both channels.',youtube:'https://www.youtube.com/results?search_query=Vapi+AI+phone+agent+WhatsApp+tutorial+2025'},
+{name:'Bland AI',category:'Phone & WhatsApp Config',capabilities:['AI phone calls','Human-like voice','Phone number provisioning','Call transfer','Function calling','API-first','Batch calling','Call analytics'],cost:'Freemium',pricing:'Free: $2 credit on signup. Pay-as-you-go: ~$0.05-0.09/min. Phone numbers: $0.50+/mo',freeTip:'Use <strong>$2 free credit</strong> to test AI phone calls — ~25-40 minutes of call time. Bland\'s voices are among the most human-sounding. Combine with free Twilio WhatsApp for full stack.',youtube:'https://www.youtube.com/results?search_query=Bland+AI+phone+calls+tutorial+2025'},
+{name:'Retell AI',category:'Phone & WhatsApp Config',capabilities:['AI phone agents','WhatsApp integration','Low-latency voice','Custom LLM','Transfer to human','Call recording','Multi-language','Analytics dashboard'],cost:'Freemium',pricing:'Free: 100 minutes trial. Pay-as-you-go: $0.05-0.15/min. No monthly minimum',freeTip:'<strong>100 free minutes</strong> is the most generous voice AI trial. Test your entire phone agent flow before paying. Retell has the lowest latency — critical for natural phone conversations.',youtube:'https://www.youtube.com/results?search_query=Retell+AI+phone+agent+tutorial+2025'},
+{name:'Tyntec (now Sinch)',category:'Phone & WhatsApp Config',capabilities:['WhatsApp Business API','SMS','RCS','Number lookup','CPaaS platform','Enterprise-grade','Template management','Global coverage'],cost:'Freemium',pricing:'Free trial available. WhatsApp: $0.004-0.06/conv. SMS: $0.004-0.09/msg',freeTip:'Use <strong>free trial to test global number provisioning</strong> — Tyntec has numbers in 180+ countries. Their template management helps avoid Meta rejections. Cheapest for European conversations.',youtube:'https://www.youtube.com/results?search_query=Tyntec+Sinch+WhatsApp+API+tutorial'},
+{name:'Turn.io',category:'Phone & WhatsApp Config',capabilities:['WhatsApp Business API','Chatbot builder','NLP integration','Analytics','Template management','Team inbox','Broadcast','API access'],cost:'Freemium',pricing:'Free: Limited trial. Pricing: Custom based on volume, typically $50-500+/mo',freeTip:'Turn.io is <strong>best for non-profits and social impact</strong> — they offer special pricing and sometimes free access for eligible organizations. Apply for their impact program if you\'re a non-profit.',youtube:'https://www.youtube.com/results?search_query=Turn.io+WhatsApp+Business+tutorial'},
+{name:'WhatsApp Business App (Direct)',category:'Phone & WhatsApp Config',capabilities:['Free business profile','Catalog/storefront','Quick replies','Automated greetings','Labels & organization','WhatsApp Web','Broadcast lists','Business API upgrade path'],cost:'Free',pricing:'Completely free for small business use. API access requires Meta Business verification (free but requires Business Manager)',freeTip:'<strong>Start here before paying any platform.</strong> Free business profile, catalog, quick replies, and automated greetings. Use labels to organize contacts. Once you outgrow 256-person broadcasts, upgrade to API via Twilio/Wati.',youtube:'https://www.youtube.com/results?search_query=WhatsApp+Business+App+full+tutorial+2025'}
+];
+
+var currentCategory='Research',sortCol=-1,sortAsc=true,currentView='table',pendingDownloadAction=null;
+
+document.addEventListener('DOMContentLoaded',function(){
+  document.getElementById('btnDownloadCurrent').addEventListener('click',function(e){e.preventDefault();e.stopPropagation();promptDownload('current');});
+  document.getElementById('btnDownloadAll').addEventListener('click',function(e){e.preventDefault();e.stopPropagation();promptDownload('all');});
+  document.getElementById('btnPrint').addEventListener('click',function(){window.print();});
+  document.getElementById('btnCopy').addEventListener('click',function(){copyTableToClipboard();});
+  document.getElementById('btnTableView').addEventListener('click',function(){setView('table');});
+  document.getElementById('btnCardView').addEventListener('click',function(){setView('card');});
+  document.getElementById('searchInput').addEventListener('input',function(){filterTools();});
+  document.getElementById('costFilter').addEventListener('change',function(){filterTools();});
+  document.getElementById('modalCancel').addEventListener('click',closeModal);
+  document.getElementById('modalConfirm').addEventListener('click',executeDownload);
+  document.getElementById('downloadOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+  document.querySelectorAll('.tools-table thead th[data-col]').forEach(function(th){th.addEventListener('click',function(){sortTable(parseInt(this.getAttribute('data-col')));});});
+  buildTabs();renderStats();renderView();
+});
+
+function capTagClass(cap){var c=cap.toLowerCase();if(c.indexOf('whatsapp')>-1)return'capability-tag whatsapp';if(c.indexOf('phone')>-1||c.indexOf('voice call')>-1)return'capability-tag phone';if(c.indexOf('sms')>-1||c.indexOf('mms')>-1||c.indexOf('2fa')>-1||c.indexOf('verify')>-1)return'capability-tag sms';if(c.indexOf('ai')>-1||c.indexOf('nlp')>-1||c.indexOf('llm')>-1||c.indexOf('bot')>-1||c.indexOf('agent')>-1)return'capability-tag ai-tag';return'capability-tag';}
+
+function promptDownload(type){var overlay=document.getElementById('downloadOverlay'),title=document.getElementById('modalTitle'),desc=document.getElementById('modalDesc'),icon=document.getElementById('modalIcon');if(type==='current'){var tools=allTools.filter(function(t){return t.category===currentCategory;});title.textContent='Download: '+currentCategory;desc.textContent='CSV with '+tools.length+' tools including capabilities, pricing, free-usage tips, and YouTube links.';}else{var cats=[];allTools.forEach(function(t){if(cats.indexOf(t.category)===-1)cats.push(t.category);});title.textContent='Download: All Categories';desc.textContent='CSV with '+allTools.length+' tools across '+cats.length+' categories including capabilities, pricing, free-usage tips, and YouTube links.';}icon.innerHTML='<i class="fas fa-file-csv"></i>';icon.style.color='var(--accent-bright)';pendingDownloadAction=type;overlay.classList.add('active');}
+function closeModal(){document.getElementById('downloadOverlay').classList.remove('active');pendingDownloadAction=null;}
+function executeDownload(){if(!pendingDownloadAction)return;var type=pendingDownloadAction;closeModal();if(type==='current'){var tools=allTools.filter(function(t){return t.category===currentCategory;});triggerDownload(buildCSV(tools,false),'AI_Tools_'+currentCategory.replace(/[^a-zA-Z0-9]/g,'_')+'.csv',tools.length);}else{triggerDownload(buildCSV(allTools,true),'AI_Tools_Directory_All_Categories.csv',allTools.length);}}
+function triggerDownload(csvString,filename,count){try{var blob=new Blob(['\uFEFF'+csvString],{type:'text/csv;charset=utf-8;'});if(navigator.msSaveBlob){navigator.msSaveBlob(blob,filename);showToast('Downloaded '+count+' tools as '+filename);return;}var url=URL.createObjectURL(blob),link=document.createElement('a');link.setAttribute('href',url);link.setAttribute('download',filename);link.style.display='none';document.body.appendChild(link);setTimeout(function(){link.click();setTimeout(function(){document.body.removeChild(link);URL.revokeObjectURL(url);},250);},100);showToast('Downloaded '+count+' tools as '+filename);}catch(err){try{var link=document.createElement('a');link.setAttribute('href','data:text/csv;charset=utf-8,'+encodeURIComponent('\uFEFF'+csvString));link.setAttribute('download',filename);link.style.display='none';document.body.appendChild(link);setTimeout(function(){link.click();setTimeout(function(){document.body.removeChild(link);},250);},100);showToast('Downloaded (fallback)');}catch(e){showToast('Download failed — use Ctrl+S',true);}}}
+function buildCSV(tools,includeCategory){var headers=includeCategory?['Category','Tool Name','Capabilities','Cost Type','Pricing Details','How to Maximize Free Usage','YouTube Tutorial Link']:['Tool Name','Capabilities','Cost Type','Pricing Details','How to Maximize Free Usage','YouTube Tutorial Link'];var lines=[headers.join(',')];for(var i=0;i<tools.length;i++){var t=tools[i];var row=includeCategory?[t.category,t.name,t.capabilities.join('; '),t.cost,t.pricing,stripHTML(t.freeTip),t.youtube]:[t.name,t.capabilities.join('; '),t.cost,t.pricing,stripHTML(t.freeTip),t.youtube];lines.push(row.map(csvEscape).join(','));}return lines.join('\r\n');}
+function csvEscape(val){if(val===null||val===undefined)return'""';var s=String(val);if(s.indexOf(',')>-1||s.indexOf('"')>-1||s.indexOf('\n')>-1)return'"'+s.replace(/"/g,'""')+'"';return'"'+s+'"';}
+function stripHTML(html){if(!html)return'';var div=document.createElement('div');div.innerHTML=html;return(div.textContent||div.innerText||'').trim();}
+
+function buildTabs(){var categories=[];allTools.forEach(function(t){if(categories.indexOf(t.category)===-1)categories.push(t.category);});var container=document.getElementById('catTabs');container.innerHTML='';categories.forEach(function(cat){var count=allTools.filter(function(t){return t.category===cat;}).length;var tab=document.createElement('button');tab.className='cat-tab'+(cat===currentCategory?' active':'');tab.innerHTML='<i class="fas '+(categoryIcons[cat]||'fa-circle')+'" style="font-size:12px;color:'+categoryColors[cat]+'"></i>'+cat+'<span class="count">'+count+'</span>';tab.addEventListener('click',function(){currentCategory=cat;sortCol=-1;document.getElementById('searchInput').value='';document.getElementById('costFilter').value='all';buildTabs();renderStats();renderView();});container.appendChild(tab);});}
+
+function renderStats(){var filtered=allTools.filter(function(t){return t.category===currentCategory;});var freeTools=filtered.filter(function(t){return t.cost==='Free'||t.cost==='Open Source';}).length;var freemiumTools=filtered.filter(function(t){return t.cost==='Freemium';}).length;var totalCapabilities=filtered.reduce(function(s,t){return s+t.capabilities.length;},0);var stats=[{n:filtered.length,l:'Total Tools',c:categoryColors[currentCategory]},{n:freeTools,l:'Free / Open Source',c:'var(--green)'},{n:freemiumTools,l:'Freemium Plans',c:'var(--accent-bright)'},{n:totalCapabilities,l:'Capabilities Listed',c:'var(--fg-muted)'}];document.getElementById('statsRow').innerHTML=stats.map(function(s){return'<div class="stat-card"><div class="stat-number" style="color:'+s.c+'">'+s.n+'</div><div class="stat-label">'+s.l+'</div></div>';}).join('');}
+
+function getFilteredTools(){var search=document.getElementById('searchInput').value.toLowerCase(),costFilter=document.getElementById('costFilter').value;return allTools.filter(function(t){if(t.category!==currentCategory)return false;if(costFilter!=='all'&&t.cost!==costFilter)return false;if(search){var s=(t.name+' '+t.capabilities.join(' ')+' '+t.cost+' '+t.pricing+' '+t.freeTip+' '+t.youtube).toLowerCase();if(s.indexOf(search)===-1)return false;}return true;});}
+function filterTools(){renderView();}
+
+function setView(v){currentView=v;document.getElementById('btnTableView').classList.toggle('active',v==='table');document.getElementById('btnCardView').classList.toggle('active',v==='card');document.getElementById('tableView').style.display=v==='table'?'':'none';document.getElementById('cardView').style.display=v==='card'?'':'none';renderView();}
+function renderView(){if(currentView==='table')renderTable();else renderCards();}
+
+function getSortedTools(){var tools=getFilteredTools();if(sortCol>=0){var keys=['name','capabilities','cost','pricing','freeTip','youtube'];tools.sort(function(a,b){var va=keys[sortCol]==='capabilities'?a.capabilities.join(', '):a[keys[sortCol]];var vb=keys[sortCol]==='capabilities'?b.capabilities.join(', '):b[keys[sortCol]];if(typeof va==='string')va=va.toLowerCase();if(typeof vb==='string')vb=vb.toLowerCase();if(va<vb)return sortAsc?-1:1;if(va>vb)return sortAsc?1:-1;return 0;});}return tools;}
+function sortTable(col){if(sortCol===col)sortAsc=!sortAsc;else{sortCol=col;sortAsc=true;}renderView();}
+function updateSortIndicators(){document.querySelectorAll('.tools-table thead th[data-col]').forEach(function(th){var col=parseInt(th.getAttribute('data-col'));th.classList.toggle('sorted',col===sortCol);var icon=th.querySelector('.sort-icon');if(icon){icon.className='sort-icon';if(col===sortCol)icon.className='sort-icon fas fa-sort-'+(sortAsc?'up':'down');}});}
+
+function renderTable(){var tools=getSortedTools(),tbody=document.getElementById('tableBody'),color=categoryColors[currentCategory];if(!tools.length){tbody.innerHTML='<tr><td colspan="6"><div class="no-results"><i class="fas fa-search"></i><p>No tools match your search</p></div></td></tr>';document.getElementById('resultCount').textContent='0 results';return;}var h='';for(var i=0;i<tools.length;i++){var t=tools[i],cc=t.cost==='Free'?'cost-free':t.cost==='Freemium'?'cost-freemium':t.cost==='Open Source'?'cost-open':'cost-paid';var ci=t.cost==='Free'?'fa-gift':t.cost==='Open Source'?'fa-code-branch':t.cost==='Freemium'?'fa-bolt':'fa-credit-card';var yl=t.name.indexOf('(')>-1?t.name.split('(')[0].trim():t.name;var caps='';for(var j=0;j<t.capabilities.length;j++)caps+='<span class="'+capTagClass(t.capabilities[j])+'">'+t.capabilities[j]+'</span>';h+='<tr><td><div class="tool-name"><span class="dot" style="background:'+color+'"></span>'+t.name+'</div></td><td class="hide-mobile">'+caps+'</td><td><span class="cost-badge '+cc+'"><i class="fas '+ci+'" style="font-size:10px"></i> '+t.cost+'</span></td><td class="pricing-cell hide-mobile">'+t.pricing+'</td><td><div class="free-tip">'+t.freeTip+'</div></td><td style="text-align:center"><a href="'+t.youtube+'" target="_blank" rel="noopener noreferrer" class="yt-link-compact" title="Watch '+yl+' tutorial"><i class="fab fa-youtube"></i></a></td></tr>';}tbody.innerHTML=h;document.getElementById('resultCount').textContent=tools.length+' tool'+(tools.length!==1?'s':'')+' in '+currentCategory;updateSortIndicators();}
+
+function renderCards(){var tools=getSortedTools(),container=document.getElementById('cardView'),color=categoryColors[currentCategory];if(!tools.length){container.innerHTML='<div class="no-results" style="grid-column:1/-1"><i class="fas fa-search"></i><p>No tools match your search</p></div>';document.getElementById('resultCount').textContent='0 results';return;}var h='';for(var i=0;i<tools.length;i++){var t=tools[i],cc=t.cost==='Free'?'cost-free':t.cost==='Freemium'?'cost-freemium':t.cost==='Open Source'?'cost-open':'cost-paid';var ci=t.cost==='Free'?'fa-gift':t.cost==='Open Source'?'fa-code-branch':t.cost==='Freemium'?'fa-bolt':'fa-credit-card';var yl=t.name.indexOf('(')>-1?t.name.split('(')[0].trim():t.name;var caps='';for(var j=0;j<t.capabilities.length;j++)caps+='<span class="'+capTagClass(t.capabilities[j])+'">'+t.capabilities[j]+'</span>';h+='<div class="tool-card"><div class="tool-card-header"><div class="tool-card-name"><span style="width:8px;height:8px;border-radius:50%;display:inline-block;background:'+color+'"></span>'+t.name+'</div><span class="cost-badge '+cc+'"><i class="fas '+ci+'" style="font-size:10px"></i> '+t.cost+'</span></div><div class="tool-card-body"><div class="tool-card-section"><div class="tool-card-label">Capabilities</div><div>'+caps+'</div></div><div class="tool-card-section"><div class="tool-card-label">Pricing</div><div class="pricing-cell">'+t.pricing+'</div></div><div class="tool-card-section"><div class="tool-card-label">How to Maximize Free Usage</div><div class="free-tip">'+t.freeTip+'</div></div></div><div style="padding-top:12px;border-top:1px solid var(--border)"><a href="'+t.youtube+'" target="_blank" rel="noopener noreferrer" class="yt-link"><i class="fab fa-youtube"></i> Watch '+yl+' Tutorial</a></div></div>';}container.innerHTML=h;document.getElementById('resultCount').textContent=tools.length+' tool'+(tools.length!==1?'s':'')+' in '+currentCategory;}
+
+function copyTableToClipboard(){var tools=getFilteredTools(),headers=['Tool Name','Capabilities','Cost','Pricing','Free Usage Tips','YouTube Tutorial'],text=headers.join('\t')+'\n';for(var i=0;i<tools.length;i++){var t=tools[i];text+=[t.name,t.capabilities.join('; '),t.cost,t.pricing,stripHTML(t.freeTip),t.youtube].join('\t')+'\n';}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){showToast('Copied '+tools.length+' tools to clipboard');}).catch(function(){fallbackCopy(text);});}else{fallbackCopy(text);}}
+function fallbackCopy(text){try{var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('Copied to clipboard');}catch(e){showToast('Copy failed — use CSV download',true);}}
+
+function showToast(msg,isError){var toast=document.getElementById('toast'),icon=toast.querySelector('i');document.getElementById('toastMsg').textContent=msg;if(isError){toast.classList.add('error');icon.className='fas fa-exclamation-circle';}else{toast.classList.remove('error');icon.className='fas fa-check-circle';}toast.classList.add('show');setTimeout(function(){toast.classList.remove('show');},3500);}
+</script>
+</body>
+</html>

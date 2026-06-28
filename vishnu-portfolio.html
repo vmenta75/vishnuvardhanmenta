@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vishnu Vardhan Menta — Senior Full Stack Engineer</title>
+<meta name="description" content="Senior Full Stack Engineer with 17+ years building enterprise applications with .NET Core, Angular, React and Azure cloud services.">
+
+<!-- Open Graph: controls the preview card when this link is shared on LinkedIn -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vishnu Vardhan Menta — Senior Full Stack Engineer">
+<meta property="og:description" content="17+ years engineering scalable enterprise systems with .NET Core, Angular, React, microservices and Azure.">
+<!-- Replace with your live Firebase URL once deployed -->
+<meta property="og:url" content="https://your-project.web.app/">
+<!-- Optional: add a 1200x630 image to your Firebase project and link it here for a richer LinkedIn preview -->
+<!-- <meta property="og:image" content="https://your-project.web.app/preview.png"> -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#050b18;
+    --bg-soft:#0a1530;
+    --panel:#0e1c3b;
+    --panel-alt:#0f2147;
+    --border:rgba(140,170,255,0.14);
+    --border-soft:rgba(140,170,255,0.08);
+    --text:#e8edf9;
+    --text-dim:#8ea0c8;
+    --text-faint:#5d6f93;
+    --accent:#4d82ff;
+    --accent-soft:rgba(77,130,255,0.16);
+    --accent-2:#27d3ee;
+    --current:#f3a83c;
+    --current-soft:rgba(243,168,60,0.16);
+    --font-display:'Sora',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'JetBrains Mono',monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 14% -10%, rgba(77,130,255,0.18), transparent 45%),
+      radial-gradient(circle at 100% 0%, rgba(39,211,238,0.10), transparent 40%),
+      var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(140,170,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(140,170,255,0.05) 1px, transparent 1px);
+    background-size:64px 64px;
+    pointer-events:none;
+    z-index:0;
+    mask-image:linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.2) 60%, transparent);
+  }
+
+  a{color:var(--accent-2); text-decoration:none;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent-2); outline-offset:3px; border-radius:4px;}
+
+  h1,h2,h3{font-family:var(--font-display); margin:0; letter-spacing:-0.01em;}
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px; position:relative; z-index:1;}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(5,11,24,0.75);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .nav-mark{
+    font-family:var(--font-mono); font-size:13px; letter-spacing:0.08em;
+    color:var(--text); display:flex; gap:10px; align-items:center;
+  }
+  .nav-mark span{color:var(--accent-2);}
+  .nav-avatar{
+    width:36px; height:36px; border-radius:50%; object-fit:cover;
+    border:1.5px solid var(--border); box-shadow:0 0 0 3px rgba(77,130,255,0.12), 0 0 14px rgba(39,211,238,0.18);
+  }
+  .nav-links{display:flex; gap:26px; font-size:14px; color:var(--text-dim);}
+  .nav-links a{color:var(--text-dim);}
+  .nav-links a:hover{color:var(--text);}
+  @media (max-width:680px){ .nav-links{display:none;} }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:96px 0 80px; position:relative;}
+  .hero-grid{display:flex; align-items:center; gap:56px; justify-content:space-between;}
+  .hero-copy{flex:1; min-width:0;}
+  .hero-photo{flex-shrink:0;}
+  .hero-photo img{
+    width:220px; height:220px; border-radius:50%; object-fit:cover; display:block;
+    border:2px solid var(--border);
+    box-shadow:0 0 0 8px rgba(77,130,255,0.08), 0 0 50px rgba(39,211,238,0.18);
+  }
+  @media (max-width:760px){
+    .hero-grid{flex-direction:column-reverse; gap:32px; text-align:center;}
+    .hero-photo img{width:160px; height:160px;}
+    .meta-row, .cta-row{justify-content:center;}
+  }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:13px; color:var(--accent-2);
+    letter-spacing:0.14em; text-transform:uppercase; margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--accent-2);}
+  .hero h1{font-size:clamp(38px,6vw,64px); font-weight:800; line-height:1.05;}
+  .hero h1 .accent{color:var(--accent-2);}
+  .hero p.role{
+    font-family:var(--font-display); font-weight:600; font-size:clamp(18px,2.4vw,22px);
+    color:var(--text-dim); margin-top:14px;
+  }
+  .hero p.summary{max-width:640px; color:var(--text-dim); margin-top:22px; font-size:15.5px;}
+  .meta-row{display:flex; flex-wrap:wrap; gap:18px; margin-top:28px; font-family:var(--font-mono); font-size:13px; color:var(--text-faint);}
+  .meta-row span{display:flex; align-items:center; gap:8px;}
+  .dot{width:6px; height:6px; border-radius:50%; background:var(--accent-2);}
+  .cta-row{display:flex; gap:14px; margin-top:36px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--font-body); font-weight:600; font-size:14px;
+    padding:13px 22px; border-radius:10px; border:1px solid var(--border);
+    display:inline-flex; align-items:center; gap:8px; cursor:pointer; transition:transform .15s, border-color .15s;
+  }
+  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#04101f; border:none;}
+  .btn-ghost{color:var(--text); background:rgba(255,255,255,0.02);}
+  .btn:hover{transform:translateY(-2px); border-color:var(--accent-2);}
+
+  /* ---------- SECTION HEAD ---------- */
+  .section{padding:88px 0;}
+  .section-head{margin-bottom:52px; max-width:560px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-size:clamp(26px,3.4vw,36px); font-weight:700;}
+  .section-head p{color:var(--text-dim); margin-top:12px; font-size:15px;}
+
+  /* ---------- JOURNEY / TIMELINE ---------- */
+  .timeline{position:relative; padding:10px 0;}
+  .timeline::before{
+    content:'';
+    position:absolute; left:50%; top:0; bottom:0; width:2px;
+    background:linear-gradient(to bottom, transparent, var(--border) 6%, var(--border) 94%, transparent);
+    transform:translateX(-50%);
+  }
+  .entry{position:relative; width:50%; padding:0 44px 64px; }
+  .entry:last-child{padding-bottom:8px;}
+  .entry--left{left:0; text-align:right;}
+  .entry--right{left:50%; text-align:left;}
+  .node{
+    position:absolute; top:6px; width:13px; height:13px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--accent); box-shadow:0 0 0 4px rgba(77,130,255,0.12);
+  }
+  .entry--left .node{right:-7px;}
+  .entry--right .node{left:-7px;}
+  .entry.is-current .node{border-color:var(--current); box-shadow:0 0 0 5px var(--current-soft), 0 0 18px rgba(243,168,60,0.5);}
+
+  .card{
+    background:linear-gradient(160deg, var(--panel), var(--panel-alt));
+    border:1px solid var(--border-soft); border-radius:14px; padding:24px 26px;
+    display:inline-block; width:100%;
+  }
+  .card .when{font-family:var(--font-mono); font-size:12.5px; color:var(--accent-2); letter-spacing:0.04em;}
+  .badge-current{
+    font-family:var(--font-mono); font-size:11px; color:var(--current); border:1px solid rgba(243,168,60,0.4);
+    background:var(--current-soft); padding:2px 8px; border-radius:20px; margin-left:8px; letter-spacing:0.06em;
+  }
+  .card h3{font-size:18px; margin-top:8px; font-weight:700;}
+  .card .company{color:var(--text-dim); font-size:13.5px; margin-top:2px; font-weight:600;}
+  .card ul{margin:16px 0 0; padding:0; list-style:none; font-size:14px; color:var(--text-dim);}
+  .entry--left .card ul{padding-left:0;}
+  .card li{position:relative; padding-left:16px; margin-bottom:8px;}
+  .entry--left .card li{padding-left:0; padding-right:16px;}
+  .card li::before{content:'›'; position:absolute; left:0; color:var(--accent-2);}
+  .entry--left .card li::before{left:auto; right:0; content:'‹';}
+  .achv{margin-top:14px; padding-top:14px; border-top:1px solid var(--border-soft); font-size:13px; color:var(--text-faint);}
+  .achv b{color:var(--text-dim); font-weight:600;}
+
+  @media (max-width:760px){
+    .timeline::before{left:18px;}
+    .entry, .entry--left, .entry--right{width:100%; left:0; text-align:left; padding:0 0 44px 46px;}
+    .entry--left .node, .entry--right .node{left:12px;}
+    .entry--left .card ul, .card ul{padding-left:0;}
+    .entry--left .card li, .card li{padding-right:0; padding-left:16px;}
+    .entry--left .card li::before, .card li::before{left:0; right:auto; content:'›';}
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+  @media (max-width:680px){ .skills-grid{grid-template-columns:1fr;} }
+  .skill-card{
+    border:1px solid var(--border-soft); border-radius:14px; padding:20px 22px;
+    background:rgba(255,255,255,0.015);
+  }
+  .skill-card h3{font-size:13px; font-family:var(--font-mono); color:var(--accent-2); letter-spacing:0.08em; text-transform:uppercase;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .tag{
+    font-size:12.5px; color:var(--text-dim); border:1px solid var(--border);
+    padding:5px 11px; border-radius:20px; background:rgba(255,255,255,0.02);
+  }
+
+  /* ---------- EDU / CERTS / STRENGTHS ---------- */
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  @media (max-width:760px){ .two-col{grid-template-columns:1fr;} }
+  .panel-box{border:1px solid var(--border-soft); border-radius:14px; padding:26px; background:rgba(255,255,255,0.015);}
+  .panel-box h3{font-size:13px; font-family:var(--font-mono); color:var(--accent-2); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:18px;}
+  .edu-item{margin-bottom:16px;}
+  .edu-item:last-child{margin-bottom:0;}
+  .edu-item .deg{font-weight:700; font-size:15px;}
+  .edu-item .school{color:var(--text-dim); font-size:13.5px; margin-top:2px;}
+  .cert-list{list-style:none; margin:0; padding:0; font-size:14px; color:var(--text-dim);}
+  .cert-list li{padding:10px 0; border-bottom:1px solid var(--border-soft); display:flex; gap:10px; align-items:flex-start;}
+  .cert-list li:last-child{border-bottom:none;}
+  .cert-list li::before{content:'✓'; color:var(--accent-2); font-weight:700;}
+
+  .strength-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:8px;}
+  @media (max-width:680px){ .strength-grid{grid-template-columns:1fr;} }
+  .strength{border:1px solid var(--border-soft); border-radius:12px; padding:16px 18px; font-size:14px; color:var(--text-dim); background:rgba(255,255,255,0.015);}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact{
+    border:1px solid var(--border); border-radius:20px; padding:48px;
+    background:radial-gradient(circle at 20% 0%, rgba(77,130,255,0.12), transparent 60%), var(--panel);
+    text-align:center;
+  }
+  .contact h2{font-size:clamp(24px,3.4vw,32px);}
+  .contact p{color:var(--text-dim); margin-top:12px;}
+  .contact .cta-row{justify-content:center;}
+  footer{padding:36px 0; text-align:center; color:var(--text-faint); font-size:13px; font-family:var(--font-mono);}
+
+  /* ---------- CURSOR SIGNATURE EFFECT ---------- */
+  .cursor-dot{
+    position:fixed; top:0; left:0; width:9px; height:9px; border-radius:50%;
+    background:var(--accent-2); pointer-events:none; z-index:9999;
+    box-shadow:0 0 10px 2px rgba(39,211,238,0.6);
+    transform:translate(-100px,-100px);
+    mix-blend-mode:screen;
+  }
+  .sig-char{
+    position:fixed; top:0; left:0; pointer-events:none; z-index:9998;
+    font-family:var(--font-mono); font-weight:500; font-size:13px;
+    transform:translate(-50%,-50%);
+    animation:sigFloat 1.05s ease-out forwards;
+    text-shadow:0 0 8px currentColor;
+  }
+  .sig-a{color:var(--accent-2);}
+  .sig-b{color:var(--accent);}
+  @keyframes sigFloat{
+    0%{opacity:0.95; transform:translate(-50%,-50%) scale(1);}
+    100%{opacity:0; transform:translate(-50%, calc(-50% - 30px)) scale(0.8);}
+  }
+  body.cursor-active, body.cursor-active a, body.cursor-active button{cursor:none;}
+
+  /* ============================================================
+     COMMON SITE NAV — identical block lives on every page.
+     See the HTML comment near <body> for instructions on adding
+     a new page later.
+     ============================================================ */
+  .site-nav{position:sticky;top:0;z-index:100;background:rgba(5,11,24,0.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(140,170,255,0.14);font-family:var(--font-display);}
+  .site-nav-inner{max-width:1080px;margin:0 auto;padding:10px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .site-nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:700;font-size:13px;letter-spacing:.04em;}
+  .site-nav-brand img{width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid var(--border);}
+  .site-nav-links{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+  .site-nav-link{font-size:13px;font-weight:500;color:var(--text-dim);text-decoration:none;padding:7px 14px;border-radius:8px;border:1px solid transparent;transition:.15s;white-space:nowrap;font-family:var(--font-body);}
+  .site-nav-link:hover{color:var(--text);background:rgba(255,255,255,0.05);}
+  .site-nav-link.is-current{color:var(--accent-2);background:var(--accent-soft);border-color:rgba(77,130,255,0.25);}
+  .nav{top:52px;}
+</style>
+</head>
+<body data-site-page="portfolio">
+<!-- ============================================================
+     COMMON SITE NAVIGATION — paste this exact block (unchanged)
+     at the top of <body> on every new page you create.
+
+     TO ADD A NEW PAGE LATER:
+       1. Build your new file, e.g. "my-new-page.html"
+       2. Copy ONE link line below (the <a class="site-nav-link">...)
+          and paste it just above "<!-- add new pages here
+       3. Set href="my-new-page.html", set the visible text, and set
+          data-page="my-new-page" (any short unique id)
+       4. On the new page's <body> tag, add: data-site-page="my-new-page"
+          That's what makes the link highlight as the active page.
+       5. Paste this whole .site-nav block + the tiny script at the
+          bottom unchanged into the new page too.
+     ============================================================ -->
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a href="vishnu-portfolio.html" class="site-nav-brand">
+      <img src="profile.png" alt="Vishnu Vardhan Menta">
+      VISHNU VARDHAN MENTA
+    </a>
+    <div class="site-nav-links">
+      <a href="vishnu-portfolio.html" class="site-nav-link" data-page="portfolio">Portfolio</a>
+      <a href="AI_Tools_Directory_2025.html" class="site-nav-link" data-page="ai-tools">AI Tools Directory</a>
+      <!-- add new pages here -->
+    </div>
+  </div>
+</nav>
+<script>
+(function(){
+  var current = document.body.getAttribute('data-site-page');
+  var links = document.querySelectorAll('.site-nav-link');
+  for (var i=0;i<links.length;i++){
+    if (links[i].getAttribute('data-page') === current) links[i].classList.add('is-current');
+  }
+})();
+</script>
+<!-- ============================================================
+     END COMMON SITE NAVIGATION
+     ============================================================ -->
+
+<nav class="nav">
+  <div class="wrap">
+    <div class="nav-mark">
+      <!-- <img class="nav-avatar" src="profile.png" alt="Vishnu Vardhan Menta">
+      VV<span>M</span> -->
+    </div>
+    <div class="nav-links">
+      <a href="#journey">Journey</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section class="hero wrap" id="top">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">17+ years in enterprise software engineering</div>
+        <h1>Vishnu Vardhan <span class="accent">Menta</span></h1>
+        <p class="role">Senior Full Stack Engineer — .NET Core · Angular · React · Azure</p>
+        <p class="summary">
+          I design and build scalable enterprise applications using .NET Core, Angular, React, TypeScript and
+          microservices architecture — with deep experience in secure APIs (OAuth2/JWT), event-driven systems
+          on Azure Service Bus and RabbitMQ, CI/CD pipelines, and Clean Architecture.
+        </p>
+        <div class="meta-row">
+          <span><span class="dot"></span> Abu Dhabi, UAE</span>
+          <span><span class="dot"></span> +971&nbsp;561&nbsp;860&nbsp;788</span>
+          <span><span class="dot"></span> vishnumm@gmail.com</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://linkedin.com/in/vvardhan" target="_blank" rel="noopener">Connect on LinkedIn →</a>
+          <a class="btn btn-ghost" href="mailto:vishnumm@gmail.com">Email me</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="profile.png" alt="Vishnu Vardhan Menta">
+      </div>
+    </div>
+  </section>
+
+  <!-- JOURNEY -->
+  <section class="section wrap" id="journey">
+    <div class="section-head">
+      <div class="eyebrow">The journey</div>
+      <h2>Where the work happened</h2>
+      <p>Three companies, one throughline: scalable systems, secure APIs, and shipping reliably.</p>
+    </div>
+
+    <div class="timeline">
+
+      <div class="entry entry--right is-current">
+        <span class="node"></span>
+        <div class="card">
+          <div class="when">MAR 2021 — PRESENT <span class="badge-current">CURRENT</span></div>
+          <h3>Senior Full Stack Developer</h3>
+          <div class="company">AD Ports Group · Abu Dhabi, UAE</div>
+          <ul>
+            <li>Designed scalable enterprise apps with .NET Core, Angular, React &amp; microservices</li>
+            <li>Built secure REST APIs with OAuth2/JWT and standardized API versioning</li>
+            <li>Ran CI/CD on Azure DevOps with feature branching &amp; code reviews</li>
+            <li>Drove event-driven processing with Azure Service Bus &amp; RabbitMQ</li>
+            <li>Mentored developers on Clean Architecture, SOLID &amp; secure coding</li>
+          </ul>
+          <div class="achv"><b>Impact:</b> improved scalability through a microservices re-architecture and faster, automated deployments via CI/CD.</div>
+        </div>
+      </div>
+
+      <div class="entry entry--left">
+        <span class="node"></span>
+        <div class="card">
+          <div class="when">DEC 2011 — FEB 2020</div>
+          <h3>Senior Software Engineer</h3>
+          <div class="company">DST Worldwide Services (SS&amp;C) · Hyderabad, India</div>
+          <ul>
+            <li>Built enterprise apps with .NET Core, ASP.NET Web API, Angular, React, SQL Server</li>
+            <li>Secured APIs with JWT/OAuth2 authentication &amp; authorization</li>
+            <li>Owned query optimization across SQL Server, PostgreSQL &amp; MySQL</li>
+            <li>Delivered in Agile/Scrum teams with full release management</li>
+            <li>Integrated messaging via RabbitMQ &amp; Azure Service Bus</li>
+          </ul>
+          <div class="achv"><b>Impact:</b> delivered enterprise apps supporting large-scale operations and strengthened API security and reliability.</div>
+        </div>
+      </div>
+
+      <div class="entry entry--right">
+        <span class="node"></span>
+        <div class="card">
+          <div class="when">FEB 2010 — AUG 2011</div>
+          <h3>Program Analyst</h3>
+          <div class="company">Wipro Infotech · Hyderabad, India</div>
+          <ul>
+            <li>Developed &amp; maintained enterprise apps on ASP.NET, WCF, SQL Server, MVC</li>
+            <li>Worked across backend services, database integration &amp; app support</li>
+            <li>Contributed across the full SDLC — testing, deployment, issue resolution</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section wrap" id="skills">
+    <div class="section-head">
+      <div class="eyebrow">Toolbox</div>
+      <h2>Core technical skills</h2>
+      <p>Front to back, cloud to database — the stack I build with day to day.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Front-End</h3>
+        <div class="tags">
+          <span class="tag">Angular 18</span><span class="tag">React</span><span class="tag">TypeScript</span>
+          <span class="tag">JavaScript ES6+</span><span class="tag">HTML5 / CSS3</span><span class="tag">Responsive Design</span>
+          <span class="tag">State Management</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Back-End</h3>
+        <div class="tags">
+          <span class="tag">.NET Core (3–8)</span><span class="tag">ASP.NET Web API</span><span class="tag">REST APIs</span>
+          <span class="tag">Microservices</span><span class="tag">Event-Driven Systems</span><span class="tag">OAuth2 / JWT</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Cloud &amp; DevOps</h3>
+        <div class="tags">
+          <span class="tag">Microsoft Azure</span><span class="tag">Azure Service Bus</span><span class="tag">Azure DevOps</span>
+          <span class="tag">CI/CD</span><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">GitHub Actions</span><span class="tag">Jenkins</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Databases</h3>
+        <div class="tags">
+          <span class="tag">SQL Server</span><span class="tag">PostgreSQL</span><span class="tag">MySQL</span>
+          <span class="tag">MongoDB</span><span class="tag">Query Optimization</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Tools &amp; Practices</h3>
+        <div class="tags">
+          <span class="tag">Git / GitFlow</span><span class="tag">Pull Requests</span><span class="tag">Code Reviews</span>
+          <span class="tag">Postman</span><span class="tag">JIRA</span><span class="tag">SoapUI</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Architecture &amp; Testing</h3>
+        <div class="tags">
+          <span class="tag">SOLID</span><span class="tag">Clean Architecture</span><span class="tag">Repository Pattern</span>
+          <span class="tag">Dependency Injection</span><span class="tag">TDD</span><span class="tag">NUnit / xUnit</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION + CERTS -->
+  <section class="section wrap" id="education">
+    <div class="section-head">
+      <div class="eyebrow">Foundations</div>
+      <h2>Education &amp; certifications</h2>
+    </div>
+    <div class="two-col">
+      <div class="panel-box">
+        <h3>Education</h3>
+        <div class="edu-item">
+          <div class="deg">Master of Computer Applications (MCA)</div>
+          <div class="school">Osmania University, Hyderabad</div>
+        </div>
+        <div class="edu-item">
+          <div class="deg">Bachelor of Science (B.Sc.)</div>
+          <div class="school">Sri Venkateshwara University</div>
+        </div>
+      </div>
+      <div class="panel-box">
+        <h3>Certifications</h3>
+        <ul class="cert-list">
+          <li>Microsoft Certified: Azure Administrator Associate</li>
+          <li>Microsoft Certified: Azure Solutions Architect Expert</li>
+          <li>Certified ScrumMaster® (CSM®)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRENGTHS -->
+  <section class="section wrap" id="strengths">
+    <div class="section-head">
+      <div class="eyebrow">Beyond the stack</div>
+      <h2>Additional strengths</h2>
+    </div>
+    <div class="strength-grid">
+      <div class="strength">Strong analytical and problem-solving skills</div>
+      <div class="strength">Effective communication and stakeholder collaboration</div>
+      <div class="strength">Continuous learning mindset and adaptability to new technologies</div>
+      <div class="strength">Experience working in cross-functional and multicultural teams</div>
+      <div class="strength">Mentoring junior developers and driving engineering best practices</div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section wrap" id="contact">
+    <div class="contact">
+      <h2>Let's build something reliable.</h2>
+      <p>Open to senior full-stack and architecture conversations — Abu Dhabi &amp; remote.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://linkedin.com/in/vvardhan" target="_blank" rel="noopener">View LinkedIn Profile</a>
+        <a class="btn btn-ghost" href="mailto:vishnumm@gmail.com">vishnumm@gmail.com</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© <span id="year"></span> Vishnu Vardhan Menta — Built for the journey ahead.</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  (function(){
+    var isFinePointer = window.matchMedia('(pointer: fine)').matches;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!isFinePointer || reduceMotion) return;
+
+    document.body.classList.add('cursor-active');
+
+    var dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    document.body.appendChild(dot);
+
+    var mouseX = -100, mouseY = -100, dotX = -100, dotY = -100;
+
+    function raf(){
+      dotX += (mouseX - dotX) * 0.22;
+      dotY += (mouseY - dotY) * 0.22;
+      dot.style.transform = 'translate(' + dotX + 'px,' + dotY + 'px)';
+      requestAnimationFrame(raf);
+    }
+    raf();
+
+    var signature = "VISHNU VARDHAN MENTA • ".split('');
+    var charIndex = 0;
+    var lastX = null, lastY = null;
+    var THRESHOLD = 26;
+
+    function spawnChar(x, y){
+      var ch = signature[charIndex % signature.length];
+      charIndex++;
+      if(ch === ' ') return;
+      var span = document.createElement('span');
+      span.className = 'sig-char ' + (Math.random() > 0.5 ? 'sig-a' : 'sig-b');
+      span.textContent = ch;
+      span.style.left = x + 'px';
+      span.style.top = y + 'px';
+      document.body.appendChild(span);
+      span.addEventListener('animationend', function(){ span.remove(); });
+    }
+
+    document.addEventListener('mousemove', function(e){
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if(lastX === null){ lastX = e.clientX; lastY = e.clientY; return; }
+      var dx = e.clientX - lastX, dy = e.clientY - lastY;
+      var dist = Math.sqrt(dx*dx + dy*dy);
+      if(dist > THRESHOLD){
+        spawnChar(e.clientX, e.clientY);
+        lastX = e.clientX; lastY = e.clientY;
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
